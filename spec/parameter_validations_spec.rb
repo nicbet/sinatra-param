@@ -197,8 +197,9 @@ describe 'Parameter Validations' do
       get('/custommessage') do |response|
         expect(JSON.parse(response.body)['message']).to eq("'a' must be less than 10")
       end
-   end
-    
+    end
+  end
+
   context 'content-type header' do
     it 'returns application/json for JSON APIs' do
       get('/validation/max_length', arg: 'reallylongstringlongerthanmax') do |response|
