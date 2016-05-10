@@ -266,4 +266,9 @@ class App < Sinatra::Base
     param :a, Integer, within: 1..10, required: true,
       message: "'a' must be less than 10"
   end
+
+  get '/xml' do
+    content_type :xml
+    param :a, Integer, within: 1..10, required: true
+  end
 end
