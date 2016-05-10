@@ -13,16 +13,10 @@ This Sinatra extension takes a first step to solving this problem on the develop
 
 ## Install
 
-You can install `sinatra-param` from the command line with the following:
-
-```bash
-$ gem install sinatra-param
-```
-
-Alternatively, you can specify `sinatra-param` as a dependency in your `Gemfile` and run `$ bundle install`:
+Specify `sinatra-param` as a dependency in your `Gemfile` and run `$ bundle install`:
 
 ```ruby
-gem "sinatra-param", require: "sinatra/param"
+gem "sinatra-param", :git => 'https://github.com/nicbet/sinatra-param.git'
 ```
 
 ## Example
@@ -43,7 +37,7 @@ class App < Sinatra::Base
   # GET /search?q=example&categories=news
   # GET /search?q=example&sort=created_at&order=ASC
   get '/search' do
-    param :q,           String, required: true
+    param :q,           String, required: true, message: 'Parameter q is required!'
     param :categories,  Array
     param :sort,        String, default: "title"
     param :order,       String, in: ["ASC", "DESC"], transform: :upcase, default: "ASC"
@@ -149,9 +143,21 @@ param :order, String, in: ["ASC", "DESC"], raise: true
 one_of :q, :categories, raise: true
 ```
 
+### Custom Exception Messages
+You can define custom error messages for each parameter if you don't want to globally change the Exception handling as described above:
+
+```ruby
+get '/search' do
+  param :q,           String, required: true, message: 'Parameter q is required!'
+end
+```
+
+
 ## Contact
 
-Mattt Thompson ([@mattt](http://twitter.com/mattt))
+- Repo Owner: Nic Bettenburg ([@nicbet](http://twitter.com/nicbet))
+- Original Author: Mattt Thompson ([@mattt](http://twitter.com/mattt))
+- Patches By: Steve Agalloco ([@anno](http://twitter.com/anno))
 
 ## License
 
