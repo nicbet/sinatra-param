@@ -192,14 +192,6 @@ describe 'Parameter Validations' do
     end
   end
 
-  context 'custom message ' do
-    it 'returns a custom message when configured' do
-      get('/custommessage') do |response|
-        expect(JSON.parse(response.body)['message']).to eq("'a' must be less than 10")
-      end
-    end
-  end
-
   context 'content-type header' do
     it 'returns application/json for JSON APIs' do
       get('/validation/max_length', arg: 'reallylongstringlongerthanmax') do |response|
@@ -210,6 +202,14 @@ describe 'Parameter Validations' do
     it 'returns text/plain for non-JSON APIs' do
       get('/xml', arg: 'reallylongstringlongerthanmax') do |response|
         expect(response.headers['Content-Type']).to include('text/plain')
+      end
+    end
+  end
+
+  context 'custom message ' do
+    it 'returns a custom message when configured' do
+      get('/custommessage') do |response|
+        expect(JSON.parse(response.body)['message']).to eq("'a' must be less than 10")
       end
     end
   end

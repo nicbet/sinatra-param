@@ -14,7 +14,7 @@ module Sinatra
     def param(name, type, options = {})
       name = name.to_s
 
-      return unless params.member?(name) or options[:default] or options[:required]
+      return unless params.member?(name) or options.has_key?(:default) or options[:required]
 
       begin
         params[name] = coerce(name, params[name], type, options)
